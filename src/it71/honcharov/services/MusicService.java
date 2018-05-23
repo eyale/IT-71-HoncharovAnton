@@ -47,4 +47,9 @@ public class MusicService {
       }
     }
   }
+
+  public void burnOnDisc() {
+    System.out.println();
+    System.out.println("The tracks was burned on the disc.");
+  }
 }

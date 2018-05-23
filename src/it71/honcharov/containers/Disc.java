@@ -26,6 +26,6 @@ public class Disc {
     service.getTotalDuration(tracklist);
     service.sortingByStyle(tracklist, ROCK);
     service.findByRange(2.49, 3.03, tracklist);
-
+    service.burnOnDisc();
   }
 }
