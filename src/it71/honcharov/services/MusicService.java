@@ -1,15 +1,18 @@
 package it71.honcharov.services;
 
-import java.util.List;
-
-import it71.honcharov.music.Track;
 import it71.honcharov.music.MusicStyles;
+import it71.honcharov.music.Track;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.List;
 
 public class MusicService {
   private static final String TOTAL_DURATION = "Total duration: ";
   private static final String MIN = " min";
   private Double duration = 0.0;
-
 
   public void getTracklist(List<Track> tracklist) {
     for (Track t : tracklist) {
@@ -32,11 +35,15 @@ public class MusicService {
         System.out.println(t.toString());
       }
     }
-    for (Track t : tracklist) {
-      if (t.getStyle() != style) {
-        System.out.println(t.toString());
+
+    Collections.sort(tracklist, Track.TrackDurationComparator);
+
+    for (Track str : tracklist) {
+      if (str.getStyle() != style) {
+        System.out.println(str);
       }
     }
+
     System.out.println();
   }
 
@@ -48,8 +55,12 @@ public class MusicService {
     }
   }
 
-  public void burnOnDisc() {
+  public void burnOnDisc(String filename, List<Track> tracklist) throws IOException {
     System.out.println();
-    System.out.println("The tracks was burned on the disc.");
+    FileWriter fileWriter = new FileWriter(filename);
+    PrintWriter printWriter = new PrintWriter(fileWriter);
+    printWriter.print(tracklist);
+    printWriter.close();
+    System.out.println("The tracks was burned on the disc");
   }
 }
